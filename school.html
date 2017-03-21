@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>高教区生活助手</title>
+	<link rel="stylesheet" href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+	<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<style>
+	div.title
+		{
+			text-align:center;
+			width:90%; 
+			height:100%;
+			overflow:auto;
+			color:#000000;
+			font-size:18px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	div.text
+		{
+			width:90%; 
+			height:100%;
+			overflow:auto;
+			font-size:15px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head>
+<body>
+	<div data-role="page" id="pageone" data-theme="a">
+		<div data-role="header" class="header" data-theme="a">
+			<h1>高教区生活助手</h1>
+		</div>
+		<div data-role="content">
+			 <form method="post" action="demoform.asp">
+      			<fieldset data-role="fieldcontain">
+       			 <label for="day">选择学校</label>
+       			 <select name="school" id="school">
+      			   	<option value="mon">学校一</option>
+      			   	<option value="tue">学校二</option>
+       			  	<option value="wed">学校三</option>
+      			  	<option value="thu">学校四</option>
+         			<option value="fri">学校五</option>
+         			<option value="sat">学校六</option>
+         			<option value="sun">学校七</option>
+        			</select>
+      			</fieldset>
+      			<input type="submit" data-inline="true" value="确定">
+    		</form>
+    		<div class="title">
+    			<p>学籍报到</p>
+    		</div>
+    		<div class="text">
+    			<p>这里填写学籍报到地点、时间等信息</p>
+    		</div>
+    		<div class="title">
+    			<p>住宿报到</p>
+    		</div>
+    		<div class="text">
+    			<p>这里填写住宿报到时间、地点等</p>
+    		</div>
+    		
+   		</div>
+   		
+		<div data-role="footer" class="footer" data-position="fixed"><!--页脚-->
+			<div data-role="navbar"data-theme="f">
+				<ul>
+					<li><a href="main.html" data-ajax="false" data-icon="home">首页</a></li>
+					<li><a href="#" data-ajax="false" data-icon="user" class="ui-btn-active ui-state-persist">开学</a></li>
+					<li><a href="#" data-ajax="false" data-icon="shop">生活</a></li>
+					<li><a href="#" data-ajax="false" data-icon="search">搜索</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>  
+</body>
+</html>

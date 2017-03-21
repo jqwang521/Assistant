@@ -1,0 +1,22 @@
+.weather{
+	margin: 0 auto;
+}
+.weather.content{
+  	margin-bottom: 30px;
+  	margin-left: 0px ;
+}
+.weather .date{
+	margin-top: 5px;
+}
+.weather .list{
+	padding: 15px;
+}
+.weather .single{
+	background: #ffffff;
+}
+/*  .weather *{
+	border: 1px solid ;
+}  */
+.weather .temperature{
+	padding: 0 px;
+}
