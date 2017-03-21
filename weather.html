@@ -46,6 +46,8 @@ $(document).ready(function(){
      */
     	var obj = JSON.parse(data);
     	var weatherData = obj.results[0].weather_data[0];
+    	document.getElementById("currentTemp").innerHTML = obj.results[0].weather_data[0].date.substring(14,16) ;
+    	document.getElementById("pm25").innerHTML =  obj.results[0].pm25;
     	for(var i=0; i<4; i++){
     		weatherData = obj.results[0].weather_data[i];
     		document.getElementById("date"+i).innerHTML = weatherData.date.substring(0,2) ;			//写入日期
@@ -75,52 +77,45 @@ $(document).ready(function(){
     </header><!--//header-->
     <section id="news" class="about section">
         <div class="container">
-            <h2 class="title text-center"><a href="news">新闻</a></h2>
       		<div class="today text-center">
-      		
-      		</div>
+      			<p class="city text-center">苏州市</p>
+      			<p class ="curTemp"id="currentTemp"><p>
+      			<p class = "pm25">pm2.5: &nbsp<span id="pm25"></span></p>
+      		</div><!--today  -->
             <div class="weather text-center">
-            	<div class="row list">
-                	<div class="col-xs-3 date">周一</div>
-                    	<div class="col-xs-5">
-                    		<img src="http://api.map.baidu.com/images/weather/day/duoyun.png">
-                    		<img src="http://api.map.baidu.com/images/weather/night/qing.png">
-                    	</div>
-                    	<div class="col-xs-4" style="padding: 0 px;">13 ~ 5℃</div>
-                    		
+                <div class="row list single">
+                    <div class="col-xs-3 date" id="date0"></div>
+                    <div class="col-xs-5" id="weatherImg0">
+                    	<img id="imgDay0">
+                    	<img id="imgNight0">
                     </div>
-                    <div class="row list single">
-                    	<div class="col-xs-3 date" id="date0"></div>
-                    	<div class="col-xs-5" id="weatherImg0">
-                    		<img id="imgDay0">
-                    		<img id="imgNight0">
-                    	</div>
-                    	<div class="col-xs-4" id="temperature0"></div>
+                    <div class="col-xs-4" id="temperature0"></div>
+                </div>
+                <div class="row list">
+                    <div class="col-xs-3 date" id="date1"></div>
+                    <div class="col-xs-5" id="weatherImg1">
+                    	<img id="imgDay1">
+                    	<img id="imgNight1">
                     </div>
-                    <div class="row list">
-                    	<div class="col-xs-3 date" id="date1"></div>
-                    	<div class="col-xs-5" id="weatherImg1">
-                    		<img id="imgDay1">
-                    		<img id="imgNight1">
-                    	</div>
-                    	<div class="col-xs-4 " id="temperature1"></div>
+                    <div class="col-xs-4 " id="temperature1"></div>
+                </div>
+                <div class="row list single">
+                    <div class="col-xs-3 date" id="date2"></div>
+                    <div class="col-xs-5" id="weatherImg2">
+                    	<img id="imgDay2">
+                    	<img id="imgNight2">
                     </div>
-                    <div class="row list single">
-                    	<div class="col-xs-3 date" id="date2"></div>
-                    	<div class="col-xs-5" id="weatherImg2">
-                    		<img id="imgDay2">
-                    		<img id="imgNight2">
-                    	</div>
-                    	<div class="col-xs-4" id="temperature2"></div>
+                    <div class="col-xs-4" id="temperature2"></div>
+                </div>
+                <div class="row list">
+                    <div class="col-xs-3 date" id="date3"></div>
+                    <div class="col-xs-5" id="weatherImg3">
+                    	<img id="imgDay3">
+                    	<img id="imgNight3">
                     </div>
-                    <div class="row list">
-                    	<div class="col-xs-3 date" id="date3"></div>
-                    	<div class="col-xs-5" id="weatherImg3">
-                    		<img id="imgDay3">
-                    		<img id="imgNight3">
-                    	</div>
-                    	<div class="col-xs-4" id="temperature3"></div>
-                    </div>       
+                    <div class="col-xs-4" id="temperature3"></div>
+                </div>  
+            </div><!--//weather-->  
         </div><!--//container-->
     </section><!--//about-->
 
