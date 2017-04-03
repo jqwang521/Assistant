@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Free Bootstrap Theme for Developers</title>
+    <title>高教区生活助手</title>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +47,7 @@ $(document).ready(function(){
     	var obj = JSON.parse(data);	//解析JSON串
     	var weatherData = obj.results[0].weather_data[0];
     	var date = obj.results[0].weather_data[0].date;
-    	document.getElementById("currentTemp").innerHTML = date.substring(date.indexOf("：")+1,date.indexOf("℃")) ;//写入实时气温
+    	document.getElementById("currentTemp").innerHTML = date.substring(date.indexOf("：")+1,date.indexOf("℃")+1) ;//写入实时气温
     	document.getElementById("pm25").innerHTML =  obj.results[0].pm25;	//写入pm2.5值
     	for(var i=0; i<4; i++){
     		weatherData = obj.results[0].weather_data[i];
@@ -62,13 +62,13 @@ $(document).ready(function(){
 });
 </script>
 </head>
-<body data-spy="scroll">
+<body>
 	
     <!-- ******HEADER****** --> 
     <header id="header" class="header">  
         <div class="container">            
             <h1 class="logo pull-left">
-                <a class="scrollto" href="#promo">
+                <a class="scrollto" href="main.html">
                     <span class="logo-title">Logo</span>
                 </a>
             </h1><!--//logo-->
@@ -86,9 +86,9 @@ $(document).ready(function(){
                     <ul class="nav navbar-nav">
                         <li class="nav-item"><a  href="main.html">主页</a></li>
                         <li class="nav-item"><a class="scrollto" href="#about">入学</a></li>
-                        <li class="nav-item"><a class="scrollto" href="#features">生活</a></li>
+                        <li class="nav-item"><a class="scrollto" href="life.html">生活</a></li>
                         <li class="nav-item"><a class="scrollto" href="#docs">公交</a></li>
-                        <li class="active nav-item sr-only"><a class="scrollto" href="#license">天气</a></li>
+                        <li class="active nav-item sr-only"><a class="scrollto" href="#">天气</a></li>
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
             </nav><!--//main-nav-->
