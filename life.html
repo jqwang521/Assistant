@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+   <!DOCTYPE html>
 <html>
 <head>
     <title>高教区生活助手</title>
@@ -20,7 +20,8 @@
     <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
     <!-- right-weather -->
     <link rel="stylesheet" type="text/css" href="right-weather.css">
-    <link id="theme-style" rel="stylesheet" href="assets/css/weather.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/weather.css">
+    <link rel="stylesheet" type="text/css" href="life.css">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -32,38 +33,39 @@
     <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script> 
     <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
     <script type="text/javascript" src="assets/js/main.js"></script>  
+    
 <script>
-$(document).ready(function(){
+  $(document).ready(function(){
   	/*jQuery ajax的post方法
   	 *语法：$.post(URL,data,callback);
   	 *学习：http://www.w3school.com.cn/jquery/jquery_ajax_get_post.asp
   	 */
-    $.post("http://api.jirengu.com/weather.php?city=suzhou",
-    function(data){//data就是API返回的JSON串
-    /*js的Json串解析：
-     *使用JSON。parse()
-     *学习： http://blog.csdn.net/lowkeysk/article/details/8175195
-     */
-    	var obj = JSON.parse(data);	//解析JSON串
-    	var weatherData = obj.results[0].weather_data[0];
-    	var date = obj.results[0].weather_data[0].date;
-    	document.getElementById("currentTemp").innerHTML = date.substring(date.indexOf("：")+1,date.indexOf("℃")) ;//写入实时气温
-    	document.getElementById("pm25").innerHTML =  obj.results[0].pm25;	//写入pm2.5值
+  	 //alert("aab");
+    	//document.write("abcdefg");
+    $.ajax({
+    	async:false,
+    	type:"GET",
+    	url:'http://dustcenix.site/api/stores.json',
+    	success:function(obj){//store是API返回的JSON串
     	for(var i=0; i<4; i++){
-    		weatherData = obj.results[0].weather_data[i];
-    		document.getElementById("date"+i).innerHTML = weatherData.date.substring(0,2) ;			//写入日期
-    		document.getElementById("imgDay"+i).src = weatherData.dayPictureUrl;	//写入日间天气图片链接
-    		document.getElementById("imgNight"+i).src = weatherData.nightPictureUrl;//写入晚间天气图片链接
-    		document.getElementById("temperature"+i).innerHTML = weatherData.temperature;//写入气温信息
-    	}				
+    		var storeDetail = obj.data[i];
+    		document.getElementById("storeName"+i).innerHTML = storeDetail.storename;//写入商户名称
+    		document.getElementById("address"+i).innerHTML = storeDetail.address;	//写入地址信息
+    	}},
+    	
     });
-    $.parser.parse();	
+     hide();
+    /* 
+    $.parser.parse(); */
+});	
+function hide(){
+$(".loading").fadeOut();
+} 
 
-});
 </script>
 </head>
-<body data-spy="scroll">
-	
+<body data-spy="scroll"> 	
+	<div class="loading">Loading</div>
     <!-- ******HEADER****** --> 
     <header id="header" class="header">  
         <div class="container">            
@@ -71,7 +73,7 @@ $(document).ready(function(){
                 <a class="scrollto" href="main.html">
                     <span class="logo-title">Logo</span>
                 </a>
-            </h1><!--//logo-->
+            </h1><!-- //logo -->
             <!-- 顶部天气结束 -->
             <nav id="main-nav" class="main-nav navbar-right" role="navigation">
                 <div class="navbar-header">
@@ -80,8 +82,8 @@ $(document).ready(function(){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button><!--//nav-toggle-->
-                </div><!--//navbar-header-->            
+                    </button><!-- //nav-toggle -->
+                </div><!-- //navbar-header -->            
                 <div class="navbar-collapse collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="nav-item"><a  href="main.html">主页</a></li>
@@ -89,12 +91,12 @@ $(document).ready(function(){
                         <li class="active nav-item sr-only"><a class="scrollto" href="#">生活</a></li>
                         <li class="nav-item"><a class="scrollto" href="#docs">公交</a></li>
                         <li class="nav-item"><a class="scrollto" href="weather.html">天气</a></li>
-                    </ul><!--//nav-->
-                </div><!--//navabr-collapse-->
-            </nav><!--//main-nav-->
-        </div><!--//container-->
-    </header><!--//header-->
-    <div style="position:fixed; margin-top:80px;">
+                    </ul><!-- //nav -->
+                </div><!-- //navabr-collapse -->
+            </nav><!-- //main-nav -->
+        </div><!-- //container -->
+    </header><!-- //header  -->
+	    <!-- <div style="position:fixed; margin-top:80px;">
     	<ul class="nav nav-tabs">
    			<li class="active"><a href="#">Home</a></li>
    			<li><a href="#">SVN</a></li>
@@ -113,19 +115,44 @@ $(document).ready(function(){
       			</ul>
    			</li>
    		</ul>
-    </div>
+    </div> -->
     <section id="news" class="about section">
         <div class="container">
-      		<div class="today text-center">
-      			<p class="city text-center">苏州市</p>
-      			<p class ="curTemp"id="currentTemp"><p>
-      			<p class = "pm25">pm2.5: &nbsp<span id="pm25"></span></p>
-      		</div><!--today  -->
+        	<div class="blank">
+        	</div>
+      		<div class="store">
+      			<img src="image/map.png">
+      			<div class="detail">	
+      				<p class ="curTemp"id="storeName0"><p>
+      				<p class = "address">地址：<span id="address0"></span></p>
+      			</div>
+      		</div>
+      		<div class="store">
+      			<img src="image/map.png">
+      			<div class="detail">	
+      				<p class ="curTemp"id="storeName1"><p>
+      				<p class = "address">地址：<span id="address1"></span></p>
+      			</div>
+      		</div>
+      		<div class="store">
+      			<img src="image/map.png">
+      			<div class="detail">	
+      				<p class ="curTemp"id="storeName2"><p>
+      				<p class = "address">地址：<span id="address2"></span></p>
+      			</div>
+      		</div>
+      		<div class="store">
+      			<img src="image/map.png">
+      			<div class="detail">	
+      				<p class ="curTemp"id="storeName3"><p>
+      				<p class = "address">地址：<span id="address3"></span></p>
+      			</div>
+      		</div><!-- store --> 
             <div class="weather text-center">
                
-            </div><!--//weather-->  
-        </div><!--//container-->
-    </section><!--//about-->
+            </div><!-- //weather  --> 
+        </div><!-- //container -->
+    </section><!-- //about --> 
 
 </body>
 </html>
