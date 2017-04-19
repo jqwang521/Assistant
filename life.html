@@ -49,10 +49,10 @@
     	success:function(obj){//store是API返回的JSON串
     	for(var i=0; i<4; i++){
     		var storeDetail = obj.data[i];
+    		document.getElementById("img"+i).src = 'http://dustcenix.site'+storeDetail.photo;//写入商户图片链接
     		document.getElementById("storeName"+i).innerHTML = storeDetail.storename;//写入商户名称
     		document.getElementById("address"+i).innerHTML = storeDetail.address;	//写入地址信息
     	}},
-    	
     });
      hide();
     /* 
@@ -87,10 +87,10 @@ $(".loading").fadeOut();
                 <div class="navbar-collapse collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="nav-item"><a  href="main.html">主页</a></li>
-                        <li class="nav-item"><a class="scrollto" href="#about">入学</a></li>
+                        <li class="nav-item"><a  href="school_update.html">入学</a></li>
                         <li class="active nav-item sr-only"><a class="scrollto" href="#">生活</a></li>
-                        <li class="nav-item"><a class="scrollto" href="#docs">公交</a></li>
-                        <li class="nav-item"><a class="scrollto" href="weather.html">天气</a></li>
+                        <li class="nav-item"><a href="#docs">公交</a></li>
+                        <li class="nav-item"><a href="weather.html">天气</a></li>
                     </ul><!-- //nav -->
                 </div><!-- //navabr-collapse -->
             </nav><!-- //main-nav -->
@@ -121,28 +121,28 @@ $(".loading").fadeOut();
         	<div class="blank">
         	</div>
       		<div class="store">
-      			<img src="image/map.png">
+      			<img id="img0">
       			<div class="detail">	
       				<p class ="curTemp"id="storeName0"><p>
       				<p class = "address">地址：<span id="address0"></span></p>
       			</div>
       		</div>
       		<div class="store">
-      			<img src="image/map.png">
+      			<img id="img1">
       			<div class="detail">	
       				<p class ="curTemp"id="storeName1"><p>
       				<p class = "address">地址：<span id="address1"></span></p>
       			</div>
       		</div>
       		<div class="store">
-      			<img src="image/map.png">
+      			<img id="img2">
       			<div class="detail">	
       				<p class ="curTemp"id="storeName2"><p>
       				<p class = "address">地址：<span id="address2"></span></p>
       			</div>
       		</div>
       		<div class="store">
-      			<img src="image/map.png">
+      			<img id="img3">
       			<div class="detail">	
       				<p class ="curTemp"id="storeName3"><p>
       				<p class = "address">地址：<span id="address3"></span></p>

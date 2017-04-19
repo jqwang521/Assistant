@@ -29,6 +29,28 @@
 			margin-right: auto;
 		}
 	</style>
+	<script>
+		$(document).ready(function(){
+   var url="http://dustcenix.site/api/schools.json";
+   $.ajax({
+     url:url,
+     dataType:'json',
+     processData: false, 
+     type:'get',
+     crossDomain: true,
+     success:function(data){
+       alert(data.data[0].name);
+			 for(var i=0;i<2;i++){ 
+   			$("#school").append("<option value="+i+">"+data.data[i].name+"</option>");
+ 			}
+     },
+     error:function(XMLHttpRequest, textStatus, errorThrown) {
+       alert(XMLHttpRequest.status);
+       alert(XMLHttpRequest.readyState);
+       alert(textStatus);
+     }});
+   });
+	</script>
 </head>
 <body>
 	<div data-role="page" id="pageone" data-theme="a">

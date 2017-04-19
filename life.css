@@ -11,15 +11,18 @@
   height: 120px;
 }
 .store .detail{
-	margin: 16px 0 0 16px;
-	border: 1px solid;
+	margin: 16px 0 0 10px;
+	/* border: 1px solid; */
 	float: left;
+	width: 60%;
 }
 .store img{
+	object-fit: cover;/* Õº∆¨æ”÷–◊‘  ”¶ */
 	float: left;
-	border: 1px solid;
-	height: 75%;
-	margin: 16px 0 0 16px;
+	/* border: 1px solid; */
+	height: 100px;
+	width: 100px;
+	margin: 10px 0 0 10px;
 }
 .store .address{
 	font-size: 12px;
@@ -28,4 +31,7 @@
 	.blank{
 		height: 35px;
 	}
+/* 	.store img{
+	width: 100px;
+	} */
 }

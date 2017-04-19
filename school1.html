@@ -65,6 +65,8 @@
 			margin-top:10px;
 		}
 		.p_select{
+			font-family: "黑体";
+			color:white;
 			font-size:16px;
 			margin-bottom:0px;
 		}
@@ -84,8 +86,6 @@
 			margin-right: auto;
 			background-color: rgb(250,250,250);
 			border-radius: 3px;
-			padding:25px 0;
-			text-align: center;
 		}
 		#school{
 			height:40px;
@@ -124,82 +124,65 @@
 	</style>
 	<script>
 		$(document).ready(function(){
-			 $.get("http://dustcenix.site/api/schools.json",function(data){
+			 $.get("http://dustcenix.site/api/schools.json",function(sch){
 			 	// var obj = JSON.parse(data);
 			 	/*不需要解析的原因是Uncaught SyntaxError: *Unexpected token o in JSON at position 1，即原因是*用ThinkPHP内置方法原因是用ThinkPHP内置方法$this->
 			 	*ajaxReturn($imgs, 'JSON');返回的数据已经是object类*型，不需要再进行JSON.parse()*转换了，可以直接当作对象使用。*/
 			 	var name,sid;
-			 	for(i=0;data.data[i].name!=null;i++){
-			 		  sid=data.data[i].sid;
-			 		  name=data.data[i].name;
-			 		  $("#school").append("<option value='"+sid+"'>"+name+"</option>");
-			 		 // var s=document.getElementById('school');
-			 		 // s.add(new Option("文本","值"));
-			 		  // s.appendChild(option);
-					   //   option.text = name;
-					   //   option.value =sid;
+			 	for(i=0;i<sch.data.length;i++){
+			 		sid=sch.data[i].sid;
+			 		name=sch.data[i].name;
+			 		 // document.getElementById('school').innerHTML+='<option value="' + sid+ '">' + name + '</option>';
+			 		 $("#school").append('<option value="' + sid+ '">' + name + '</option>');
+			 		
+			 		
 			 	}
-
-				$("#myButton").click(function(){
-					var sid;
-					var sel=document.getElementById("school");
-					var index=sel.selectedIndex;
-					var value=sel.options[index].value;
-						for(i=0;data.data[i].name!=null;i++){
-							sid=data.data[i].sid;
-							if(sid==value){
-								document.getElementById("sadd").innerHTML="学校地址："+data.data[i].saddress;
-								document.getElementById("badd").innerHTML="学籍报到地址："+data.data[i].baddress;
-								document.getElementById("ladd").innerHTML="住宿报到地址："+data.data[i].laddress;
-								document.getElementById("simg"+i).src = data.data.sic;
-							}
-						}	 
-					})
-			});
-			
-		}); 
+				 // document.getElementById("school").innerHTML=obj.data[0].name;
+				 });
+			// // $("#myButton").click(function(){
+				// })
+		});
+			// function BuildSelectBox(url, par, sel) {  
+			// 		 $(sel).empty();  
+			// 		 $.getJSON(url, { id: par }, function (json, textStatus) {  
+			// 		  for (var i = json.length - 1; i >= 0; i--) {  
+			// 		   $(sel).prepend('<option value="' + json[i].Id + '">' + json[i].Name + '</option>')  
+			// 		  };  
+			// 		  $(sel).prepend('<option value="0">请选择</option>')  
+			// 		 });  
+			// 		}  
 	</script>
 </head>
 <body>
-	<header id="header" class="header">  
-        <div class="container">            
-            <h1 class="logo pull-left">
-                <a class="scrollto" href="main.html">
-                    <span class="logo-title">首页</span>
-                </a>
-            </h1><!--//logo-->
-            <!-- 顶部天气结束 -->
-            <nav id="main-nav" class="main-nav navbar-right" role="navigation">
-                <div class="navbar-header">
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button><!--//nav-toggle-->
-                </div><!--//navbar-header-->            
-                <div class="navbar-collapse collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item"><a  href="main.html">主页</a></li>
-                        <li class="active nav-item"><a class="scrollto" href="#about" style="color:white">入学</a></li>
-                        <li class="nav-item"><a class="scrollto" href="life.html">生活</a></li>
-                        <li class="nav-item"><a class="scrollto" href="#docs">公交</a></li>
-                        <li class=" nav-item "><a class="scrollto" href="#">天气</a></li>
-                    </ul><!--//nav-->
-                </div><!--//navabr-collapse-->
-            </nav><!--//main-nav-->
-        </div><!--//container-->
-    </header><!--//header-->
+	<div class="navbar navbar-default header" role="navigation">
+		<div class="navbar-header">
+			<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+				<span class="sr-only">Toggle Navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="##" class="navbar-brand" style="font-weight:bolder"><p>首页</p></a>
+		</div>
+		<div class="collapse navbar-collapse navbar-responsive-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="##"><p>首页</p></a></li>
+				<li class="active"><a href="##"><p>开学</p></a></li>
+				<li><a href="##"><p>生活</p></a></li>
+				<li><a href="##"><p>搜索</p></a></li>
+			</ul>
+		</div>
+	</div>
 <div class="b_middle">
 	<div data-role="content" class="content"> 
 		<form role="form">
 			<div class="form-group">
-				<label for="day"><p class="p_select">选择学校 >></p></label>
+				<label for="day"><p class="p_select" style="color:rgb(0,0,0);">选择学校 >></p></label>
 				<div class="container">
 					<select class="form-control select" name="school" id="school" >
-						<option value="s">请选择学校</option>
+						
 					</select>
-					<button class="btn sure" type="button" id="myButton">确定</button>
+					<button class="btn sure" id="myButton">确定</button>
 				</div>
 			</div>	  
 		</form>
@@ -209,15 +192,13 @@
 		<p>学籍报到</p>
 	</div>
 	<div class="text">
-        <p id="sadd"></p>
-        <p id="badd"></p>
+		<p>这里填写学籍报到地点、时间等信息这里填写学籍报到地点、时间等信息这里填写学籍报到地点、时间等信息这里填写学籍报到地点、时间等信息这里填写学籍报到地点、时间等信息这里填写学籍报到地点、时间等信息这里填写学籍报到地点、时间等信息这里填写学籍报到地点、时间等信息</p>
 	</div>
 	<div class="title">
 		<p>住宿报到</p>
 	</div>
 	<div class="text">
-		<p id="ladd"></p>
-		<img id="simg"/>
+		<p>这里填写住宿报到时间、地点等</p>
 	</div>
 	</div>	
 </div>
