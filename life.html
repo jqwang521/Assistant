@@ -4,10 +4,6 @@
     <title>高教区生活助手</title>
     <!-- Meta -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">    
     <link rel="shortcut icon" href="favicon.ico">  
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
@@ -45,21 +41,39 @@
     	type:"GET",
     	url:'http://dustcenix.site/api/stores.json',
     	success:function(obj){//store是API返回的JSON串
-    	for(var i=0; i<4; i++){
+    	for(var i=0; i<obj.data.length; i++){
     		var storeDetail = obj.data[i];
-    		document.getElementById("img"+i).src = 'http://dustcenix.site'+storeDetail.photo;//写入商户图片链接
-    		document.getElementById("storeName"+i).innerHTML = storeDetail.storename;//写入商户名称
-    		document.getElementById("address"+i).innerHTML = storeDetail.address;	//写入地址信息
+    		
+    		var divStore = document.createElement("div");
+    		divStore.setAttribute("class", "store");
+    		var img = document.createElement("img");
+    		img.setAttribute("src",'http://dustcenix.site'+storeDetail.photo );
+    		var divDetail = document.createElement("div");
+    		divDetail.setAttribute("class", "detail");
+    		var p = document.createElement("p");
+    		p.setAttribute("class", "curTemp");
+    		p.innerHTML = storeDetail.storename;
+    		var pAddress = document.createElement("p");
+    		pAddress.setAttribute("class", "address");
+    		pAddress.setAttribute("onclick","jump(this);");
+    		pAddress.innerHTML = "地址:"+storeDetail.address;
+    		divDetail.appendChild(p);
+    		divDetail.appendChild(pAddress);
+    		divStore.appendChild(img);
+    		divStore.appendChild(divDetail);
+    		document.getElementById("storecon").appendChild(divStore);
     	}},
     });
      hide();
-    /* 
-    $.parser.parse(); */
 });	
 function hide(){
 $(".loading").fadeOut();
 } 
 
+function jump(obj){
+	var url = "goToHere.html?addr="+encodeURI(encodeURI(obj.parentNode.firstChild.innerHTML));
+	window.location.href = url;
+} 
 </script>
 </head>
 <body data-spy="scroll"> 	
@@ -115,9 +129,9 @@ $(".loading").fadeOut();
    		</ul>
     </div> -->
     <section id="news" class="about section">
-        <div class="container">
+        <div id="storecon" class="container">
         	<div class="blank">
-        	</div>
+        	</div><!-- 
       		<div class="store">
       			<img id="img0">
       			<div class="detail">	
@@ -145,7 +159,7 @@ $(".loading").fadeOut();
       				<p class ="curTemp"id="storeName3"><p>
       				<a href="goToHere.html" class = "address">地址：<span id="address3"></span></a>
       			</div>
-      		</div><!-- store --> 
+      		</div>store  -->
             <div class="weather text-center">
                
             </div><!-- //weather  --> 
