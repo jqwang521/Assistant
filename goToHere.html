@@ -2,7 +2,7 @@
 <html>
 <head>
 	
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script src="http://api.map.baidu.com/components?ak=Zo7heXRdSoR8k4ueCvQqRLUeTatDVuVH&v=1.0"></script>
     <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>   
@@ -21,6 +21,7 @@
      	if(r!=null)return  unescape(r[2]); return null;
 	}
 	 $(document).ready(function(){
+	 //alert(decodeURI(decodeURI(GetQueryString("addr"))));
 	 $.ajax({
     	url:"http://dustcenix.site/api/getaddress.json",
     	type:"GET",
