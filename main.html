@@ -151,22 +151,18 @@
     <script type="text/javascript" src="assets/js/main.js"></script>  
     <script type="text/javascript">
         $(document).ready(function(){
-    /*jQuery ajax的post方法
-     *语法：$.post(URL,data,callback);
-     *学习：http://www.w3school.com.cn/jquery/jquery_ajax_get_post.asp
-     */
-    $.post("http://api.jirengu.com/weather.php?city=suzhou",
-    function(data){
-    /*js的Json串解析：
-     *使用JSON。parse()
-     *学习： http://blog.csdn.net/lowkeysk/article/details/8175195
-     */
-        var obj = JSON.parse(data);
-        var weatherData = obj.results[0].weather_data[0];
-        document.getElementById("wind").innerHTML=weatherData.wind;
-        document.getElementById("temperature").innerHTML=weatherData.temperature;
-    });
-});
+    		$.ajax({
+    			url:"http://api.jirengu.com/weather.php?city=suzhou",
+    			async:false,
+    			type:"POST",
+    			success:function(data){
+        			var obj = JSON.parse(data);
+        			var weatherData = obj.results[0].weather_data[0];
+        			document.getElementById("wind").innerHTML=weatherData.wind;
+        			document.getElementById("temperature").innerHTML=weatherData.temperature;
+    			}
+    		});
+		});
     </script>     
 </body>
 </html> 
