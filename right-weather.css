@@ -3,7 +3,7 @@
 	padding:0;
 }
 #right-weather{
-	width:220px;
+	width:250px;
 	height: 50px;
 	color:white;
 	font-size:14px;
@@ -13,7 +13,7 @@
 #ul-weather{
 	display:block;
 	height:30px;
-	width:220px;
+	width:250px;
 	margin:0 auto;
 	list-style:none;
 	margin-top:20px;
