@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+	<!-- Plugins CSS -->    
+	<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="assets/plugins/prism/prism.css">
+	<!-- Theme CSS -->  
+	<link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+	<!-- right-weather -->
+	<link rel="stylesheet" type="text/css" href="right-weather.css">
+	<link id="theme-style" rel="stylesheet" href="assets/css/weather.css">
+	<script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>   
+    <script type="text/javascript" src="assets/plugins/jquery.easing.1.3.js"></script>   
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>     
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script> 
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/js/main.js"></script>   
+	<title>高教区生活助手</title>
+	<style>
+		html {
+			margin:0;
+			padding:0;
+			min-height: 100%;
+			background-color: rgb(245,245,245);
+		}
+		.b_middle{
+			padding:90px 0;
+			background-color: rgb(245,245,245);
+		}
+		#pageone{
+			background-color: rgb(245,245,245);
+		}
+		.header{
+			background-color: rgb(23,186,239);
+		}
+		a p{
+			color:white;
+		}
+		.navbar-toggle{
+			background-color: rgb(230,230,230);
+		}
+		div.title
+		{
+			text-align:center;
+			width:30%; 
+			height:40px;
+			overflow:auto;
+			color:#000000;
+			font-size:16px;
+			margin-left: auto;
+			margin-right: auto;
+			background-color: #eee;
+			overflow:hidden;
+			font-family: "黑体";
+			border-radius:25px;
+			margin-top: 30px;
+		}
+		.title p{
+			width:100%;
+			height:100%;
+			vertical-align: middle;
+			margin-top:10px;
+		}
+		.p_select{
+			font-size:16px;
+			margin-bottom:0px;
+		}
+		.s_middle{
+			padding:5px 0;
+			background-color: rgb(230,230,230);
+		}
+		div .text
+		{
+			width:90%; 
+			height:100%;
+			overflow:auto;
+			font-size:15px;
+			margin-top:8px;
+			margin-bottom:20px;
+			margin-left: auto;
+			margin-right: auto;
+			background-color: rgb(250,250,250);
+			border-radius: 3px;
+			padding:25px 0;
+			text-align: center;
+		}
+		#school{
+			height:40px;
+			font-size:15px;
+			margin-left:10%;
+			margin-bottom: 5px;
+			width:80%;
+		}
+
+		.sure{
+			display:block;
+			margin:0 auto;
+		}
+		@media screen and (max-width:980px){
+			.sure{
+				float:left;
+				margin-left: 10px;
+			}
+			#school{
+				margin-left:13%;
+				float:left;
+				width:65%;
+			}
+		}
+		@media screen and (max-width:480px){
+			.sure{
+				float:left;
+				margin-left: 10px;	
+			}
+			#school{
+				margin-left:15%;
+				float:left;
+				width:50%;
+			}
+		}
+	</style>
+	<script>
+		$(document).ready(function(){
+			 $.get("http://dustcenix.site/api/schools.json",function(data){
+			 	// var obj = JSON.parse(data);
+			 	/*不需要解析的原因是Uncaught SyntaxError: *Unexpected token o in JSON at position 1，即原因是*用ThinkPHP内置方法原因是用ThinkPHP内置方法$this->
+			 	*ajaxReturn($imgs, 'JSON');返回的数据已经是object类*型，不需要再进行JSON.parse()*转换了，可以直接当作对象使用。*/
+			 	
+			 	for(var i=0;data.data.content[i].name!=null;i++){
+			 		 var sid=data.data.content[i].sid;
+			 		  var name=data.data.content[i].name;
+			 		  $("#school").append("<option value='"+sid+"'>"+name+"</option>");
+			 		 // var s=document.getElementById('school');
+			 		 // s.add(new Option("文本","值"));
+			 		  // s.appendChild(option);
+					   //   option.text = name;
+					   //   option.value =sid;
+			 	}
+
+				$("#myButton").click(function(){
+					var sid;
+					var sel=document.getElementById("school");
+					var index=sel.selectedIndex;
+					var value=sel.options[index].value;
+						for(i=0;data.data.content[i].name!=null;i++){
+							sid=data.data.content[i].sid;
+							if(sid==value){
+								document.getElementById("sadd").innerHTML="学校地址："+data.data.content[i].saddress;
+								document.getElementById("badd").innerHTML="学籍报到地址："+data.data.content[i].baddress;
+								document.getElementById("ladd").innerHTML="住宿报到地址："+data.data.content[i].laddress;
+								document.getElementById("simg"+i).src = data.data.sic;
+							}
+						}	 
+					})
+			});
+			
+		}); 
+	</script>
+</head>
+<body>
+	<header id="header" class="header">  
+        <div class="container">            
+            <h1 class="logo pull-left">
+                <a class="scrollto" href="main.html">
+                    <span class="logo-title">首页</span>
+                </a>
+            </h1><!--//logo-->
+            <!-- 顶部天气结束 -->
+            <nav id="main-nav" class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->            
+                <div class="navbar-collapse collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item"><a  href="main.html">主页</a></li>
+                        <li class="active nav-item sr-only"><a href="#">入学</a></li>
+                        <li class="nav-item"><a href="life.html">生活</a></li>
+                        <li class="nav-item"><a href="#docs">公交</a></li>
+                        <li class=" nav-item "><a href="weather.html">天气</a></li>
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->
+        </div><!--//container-->
+    </header><!--//header-->
+<div class="b_middle">
+	<div data-role="content" class="content"> 
+		<form role="form">
+			<div class="form-group">
+				<label for="day"><p class="p_select">选择学校 >></p></label>
+				<div class="container">
+					<select class="form-control select" name="school" id="school" >
+						<option value="s">请选择学校</option>
+					</select>
+					<button class="btn sure" type="button" id="myButton">确定</button>
+				</div>
+			</div>	  
+		</form>
+	</div>
+	<div class="s_middle">
+	<div class="title">
+		<p>学籍报到</p>
+	</div>
+	<div class="text">
+        <p id="sadd"></p>
+        <p id="badd"></p>
+	</div>
+	<div class="title">
+		<p>住宿报到</p>
+	</div>
+	<div class="text">
+		<p id="ladd"></p>
+		<img id="simg"/>
+	</div>
+	</div>	
+</div>
+
+
+</body>
+</html>
