@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Plugins CSS -->    
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/plugins/prism/prism.css">
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+    <!-- right-weather -->
+    <link rel="stylesheet" type="text/css" href="right-weather.css">
+    <link id="theme-style" rel="stylesheet" href="assets/css/weather.css">
+    <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>   
+    <script type="text/javascript" src="assets/plugins/jquery.easing.1.3.js"></script>   
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>     
+    <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script> 
+    <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>    
+    <script type="text/javascript" src="assets/js/main.js"></script>   
+    <title>高教区生活助手</title>
+    <style>
+        html {
+            margin:0;
+            padding:0;
+            min-height: 100%;
+            background-color: rgb(245,245,245);
+        }
+        .b_middle{
+            padding:90px 0;
+            background-color: rgb(245,245,245);
+        }
+        #pageone{
+            background-color: rgb(245,245,245);
+        }
+        .header{
+            background-color: rgb(23,186,239);
+        }
+        a p{
+            color:white;
+        }
+        .navbar-toggle{
+            background-color: rgb(230,230,230);
+        }
+        div.title
+        {
+            text-align:center;
+            width:30%; 
+            height:40px;
+            overflow:auto;
+            color:#000000;
+            font-size:16px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #eee;
+            overflow:hidden;
+            font-family: "黑体";
+            border-radius:25px;
+            margin-top: 30px;
+            margin-bottom:10px;
+        }
+        .title p{
+            width:100%;
+            height:100%;
+            vertical-align: middle;
+            margin-top:10px; 
+        }
+        .p_select{
+            font-size:16px;
+            margin-bottom:0px;
+        }
+        .s_middle{
+            padding:5px 0;
+            background-color: rgb(230,230,230);
+        }
+        div .text
+        {
+            width:90%; 
+            height:100%;
+            overflow:auto;
+            font-size:15px;
+            margin-top:8px;
+            margin-bottom:20px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgb(250,250,250);
+            border-radius: 3px;
+            padding:25px 0;
+            text-align: center;
+        }
+        .bus{
+            height:40px;
+            font-size:15px;
+            margin-left:10%;
+            margin-bottom: 5px;
+            width:80%;
+        }
+
+        .sure{
+            display:block;
+            margin:0 auto;
+        }
+        .list{
+            text-align: center;
+        }
+        @media screen and (max-width:980px){
+            .sure{
+                float:left;
+                margin-left: 10px;
+            }
+            .bus{
+                margin-left:13%;
+                float:left;
+                width:65%;
+            }
+        }
+        @media screen and (max-width:480px){
+            .sure{
+                float:left;
+                margin-left: 10px;  
+            }
+            .bus{
+                margin-left:15%;
+                float:left;
+                width:50%;
+            }
+        }
+    </style>
+    <script>
+        
+         $(document).ready(function(){
+            var butt = document.getElementById("myButton");
+            var butt1 = document.getElementById("myButton1");
+             butt.onclick = function(){
+                var site = document.getElementById("site");
+                var svalue = site.value;
+             $.get("http://dustcenix.site/api/bus.json?bus="+svalue,function(data){
+                 //var obj = json.parse(data);
+                /*不需要解析的原因是Uncaught SyntaxError: *Unexpected token o in JSON at position 1，即原因是*用ThinkPHP内置方法原因是用ThinkPHP内置方法$this->
+                *ajaxReturn($imgs, 'JSON');返回的数据已经是object类*型，不需要再进行JSON.parse()*转换了，可以直接当作对象使用。*/
+                     for(var i=0;i<data.data.length;i++){
+                        
+                        var sid=data.data[i].statID;
+                        //alert(sid);
+                        var name=data.data[i].name;
+                        var path=data.data[i].path;
+                        var direction=data.data[i].direction;
+                        $("#station").append("<option value='"+sid+"'>"+name+"："+path+"--"+direction+"</option>");
+                     }
+                      butt1.onclick = function(){
+                    var station = document.getElementById("station");
+                    var index = station.selectedIndex;
+                    var value = station.options[index].value;
+                    for(var i=0;i<data.data.length;i++){
+                        var sid = data.data[i].statID; 
+                        if(sid == value){
+                           $.get("http://dustcenix.site/api/station.json?station="+value,function(data){
+                                    for(var j=0;j<data.data.length;j++){
+                                        var station = data.data[j].name; 
+                                        var direction = data.data[j].direction; 
+                                        var distance = data.data[j].distance; 
+                                       $("#info").append("<div class=row list>");
+                                       $("#info").append("<div class=col-xs-3>"+station+"</div>");
+                                       $("#info").append("<div class=col-xs-5>"+direction+"</div>");
+                                       $("#info").append("<div class=col-xs-4>"+distance+"</div>"); 
+                                       $("#info").append("</div>");  
+                                    }
+                           });
+                        }
+                    }
+                
+               
+            }
+                });
+         };
+
+               
+        });
+    </script>
+</head>
+<body>
+    <header id="header" class="header">  
+        <div class="container">            
+            <h1 class="logo pull-left">
+                <a class="scrollto" href="main.html">
+                    <span class="logo-title">首页</span>
+                </a>
+            </h1><!--//logo-->  
+            <nav id="main-nav" class="main-nav navbar-right" role="navigation">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button><!--//nav-toggle-->
+                </div><!--//navbar-header-->            
+                <div class="navbar-collapse collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="nav-item"><a  href="main.html">主页</a></li>
+                        <li class="active nav-item sr-only"><a href="#">公交</a></li>
+                        <li class="nav-item"><a href="life.html">入学</a></li>
+                        <li class="nav-item"><a href="#docs">生活</a></li>
+                        <li class=" nav-item "><a href="weather.html">天气</a></li>
+                    </ul><!--//nav-->
+                </div><!--//navabr-collapse-->
+            </nav><!--//main-nav-->
+        </div><!--//container-->
+    </header><!--//header-->
+<div class="b_middle">
+    <div data-role="content" class="content"> 
+        <form role="form">
+            <div class="form-group">
+                <label ><p class="p_select">&nbsp&nbsp&nbsp请输入您的上车地点 >></p></label>
+                <div class="container">
+                    <input class="bus" id="site" type="text"/>
+                    <button class="btn sure" type="button" id="myButton">确定</button>
+                </div>
+            </div>    
+        </form>
+        <form role="form">
+            <div class="form-group">
+                <label for="station"><p class="p_select">&nbsp&nbsp&nbsp请选择上车公交站点 >></p></label>
+                <div class="container">
+                    <select class="form-control select bus" name="school" id="station">
+                        <option value="s">请选择</option>
+                    </select>
+                    <button class="btn sure" type="button" id="myButton1">确定</button>
+                </div>
+            </div>    
+        </form>
+    </div>
+    <div class="s_middle">
+    <div class="title">
+        <p>电子站牌信息</p>
+    </div>
+    <div class="row list single" id="info">
+        <div class="col-xs-3 list" id="station">公交</div>
+        <div class="col-xs-5 list" id="direction">方向</div>
+        <div class="col-xs-4 list" id="distance">距离本站距离</div>
+    </div>
+    </div>  
+</div>
+
+
+</body>
+</html>
