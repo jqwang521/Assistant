@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<script src="http://api.map.baidu.com/components?ak=Zo7heXRdSoR8k4ueCvQqRLUeTatDVuVH&v=1.0"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>   
+    <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="assets/plugins/jquery.easing.1.3.js"></script>   
 	<title>地图标注点</title>
 	<style type="text/css">
@@ -14,25 +14,25 @@
 		@media (max-device-width: 800px){#golist{display: block!important;}}
 	</style>
 	<script>
-	function GetQueryString(name)
+/*	function GetQueryString(name)
 	{
      	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      	var r = window.location.search.substr(1).match(reg);
      	if(r!=null)return  unescape(r[2]); return null;
 	}
 	 $(document).ready(function(){
-	 //alert(decodeURI(decodeURI(GetQueryString("addr"))));
+		 //alert(decodeURI(decodeURI(GetQueryString("addr"))));
 	 $.ajax({
     	url:"http://dustcenix.site/api/getaddress.json",
     	type:"GET",
     	success:function(address){
     				$.ajax({
     					url:"http://dustcenix.site/api/getplace.json",
-    					data:{query:decodeURI(decodeURI(GetQueryString("addr"))),region:address.data.content.address_detail.city},
+    					data:{query:decodeURI(decodeURI(GetQueryString("addr"))),region:"苏州"},
     					async:false,
     					type:"GET",
     					success:function(obj){
-    						for(var i=0; i<obj.data.results.length&&i<5; i++){
+    						for(var i=0; i<2; i++){
     						var loc = obj.data.results[i];
     						document.getElementById("maps").innerHTML += "<lbs-poi name=\""+loc.name+"\" location=\""+loc.location.lng+","+loc.location.lat+"\" addr=\""+loc.address+"\" ></lbs-poi>";	
     					}
@@ -40,12 +40,15 @@
     			});  
     		}
     	}); 
-	})
+	})*/
+
 	</script>
 </head>
 <body>
     <lbs-map id="maps" width="100px" style="height:100%" center="120.727279,31.277197">
-    	<!-- <lbs-poi name="白鹭园" location="120.727279,31.277197" addr="翠薇街101" ></lbs-poi> -->
+<!--
+    	 <lbs-poi name="白鹭园" location="120.727279,31.277197" addr="翠薇街101" ></lbs-poi>
+-->
     </lbs-map>
 </body>
 </html>

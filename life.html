@@ -39,11 +39,12 @@
     	type:"GET",
     	url:'http://dustcenix.site/api/stores.json',
     	success:function(obj){//store是API返回的JSON串
-    	for(var i=0; i<obj.data.length; i++){
-    		var storeDetail = obj.data[i];
+    	for(var i=0; i<obj.data.content.length; i++){
+    		var storeDetail = obj.data.content[i];
     		
     		var divStore = document.createElement("div");
     		divStore.setAttribute("class", "store");
+            divStore.setAttribute("onclick","alert('成功')");//店铺详细信息入口
     		var img = document.createElement("img");
     		img.setAttribute("src",'http://dustcenix.site'+storeDetail.photo );
     		var divDetail = document.createElement("div");
@@ -66,7 +67,10 @@
 });	
 function hide(){
 $(".loading").fadeOut();
-} 
+}
+  function jumpToDetail(obj){
+      var url=""
+  }
 
 function jump(obj){
 	var url = "goToHere.html?addr="+encodeURI(encodeURI(obj.parentNode.firstChild.innerHTML));
@@ -106,26 +110,6 @@ function jump(obj){
             </nav><!-- //main-nav -->
         </div><!-- //container -->
     </header><!-- //header  -->
-	    <!-- <div style="position:fixed; margin-top:80px;">
-    	<ul class="nav nav-tabs">
-   			<li class="active"><a href="#">Home</a></li>
-   			<li><a href="#">SVN</a></li>
-   			<li><a href="#">iOS</a></li>
-   			<li><a href="#">VB.Net</a></li>
-   			<li class="dropdown">
-      			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-         	Java <span class="caret"></span>
-      			</a>
-      			<ul class="dropdown-menu">
-         			<li><a href="#">Swing</a></li>
-         			<li><a href="#">jMeter</a></li>
-         			<li><a href="#">EJB</a></li>
-         			<li class="divider"></li>
-         			<li><a href="#">分离的链接</a></li>
-      			</ul>
-   			</li>
-   		</ul>
-    </div> -->
     <section id="news" class="about section">
         <div id="storecon" class="container">
         	<div class="blank">
