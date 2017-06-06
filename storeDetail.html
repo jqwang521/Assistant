@@ -31,10 +31,61 @@
     <script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>
     <script type="text/javascript" src="assets/plugins/prism/prism.js"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                type:"GET",
+                url:'http://dustcenix.site/api/stores/'+sessionStorage.sid+'.json',
+                success:function(obj){//store是API返回的JSON串
+                        var storeDetail = obj.data;
+
+                        var divStore = document.createElement("div");
+                        divStore.setAttribute("class", "store");
+                        divStore.setAttribute("sid",storeDetail.sid);//店铺详细信息入口
+                        var img = document.createElement("img");
+                        img.setAttribute("src",'http://dustcenix.site'+storeDetail.photo );
+                        var divDetail = document.createElement("div");
+                        divDetail.setAttribute("class", "detail");
+                        var p = document.createElement("p");
+                        p.setAttribute("class", "curTemp");
+                        p.innerHTML = storeDetail.storename;
+                        var pAddress = document.createElement("p");
+                        pAddress.setAttribute("class", "address");
+                        pAddress.setAttribute("onclick","jump(this);");
+                        pAddress.innerHTML = "地址:"+storeDetail.address;
+                        divDetail.appendChild(p);
+                        divDetail.appendChild(pAddress);
+                        divStore.appendChild(img);
+                        divStore.appendChild(divDetail);
+                        document.getElementById("storecon").appendChild(divStore);
+                    },
+            });
+            $.ajax({
+                type:"GET",
+                url:'http://dustcenix.site/api/comments/'+sessionStorage.sid+'.json',
+                success:function(obj){//store是API返回的JSON串
+                    for(var i=0;i<obj.data.length;i++){
+                    var commentDetail = obj.data[i];
+                    var divcomments = document.createElement("div");
+                    divcomments.setAttribute("class", "container");
+                    var commentp = document.createElement("p");
+                    commentp.setAttribute("class", "comment");
+                    commentp.innerHTML = commentDetail.comment;
+                    var namep = document.createElement("p");
+                    namep.setAttribute("class", "username");
+                    namep.innerHTML = commentDetail.name;
+                    divcomments.appendChild(namep);
+                    divcomments.appendChild(commentp);
+                    if(i<obj.data.length-1)
+                        divcomments.appendChild(document.createElement("hr"));
+                    document.getElementById("comments").appendChild(divcomments);
+                    }
+                },
+            });
+        });
+    </script>
 </head>
-<body>
 <body data-spy="scroll">
-<div class="loading">Loading</div>
 <!-- ******HEADER****** -->
 <header id="header" class="header">
     <div class="container">
@@ -65,4 +116,16 @@
         </nav><!-- //main-nav -->
     </div><!-- //container -->
 </header><!-- //header  -->
+
+<section id="news" class="about section">
+    <div id="storecon" class="container">
+        <div class="blank">
+        </div>
+    </div><!-- //container -->
+    <div class="container">
+        <div id="comments" class="comments">
+            <div class="title">评论</div>
+        </div>
+    </div>
+</section><!-- //about -->
 </body>
