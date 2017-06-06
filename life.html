@@ -44,7 +44,8 @@
     		
     		var divStore = document.createElement("div");
     		divStore.setAttribute("class", "store");
-            divStore.setAttribute("onclick","alert('成功')");//店铺详细信息入口
+            divStore.setAttribute("sid",storeDetail.sid);
+            divStore.setAttribute("onclick","jumpToDetail(this)");//店铺详细信息入口
     		var img = document.createElement("img");
     		img.setAttribute("src",'http://dustcenix.site'+storeDetail.photo );
     		var divDetail = document.createElement("div");
@@ -53,8 +54,8 @@
     		p.setAttribute("class", "curTemp");
     		p.innerHTML = storeDetail.storename;
     		var pAddress = document.createElement("p");
-    		pAddress.setAttribute("class", "address");
-    		pAddress.setAttribute("onclick","jump(this);");
+    		pAddress.setAttribute("class", "address");/*
+    		pAddress.setAttribute("onclick","jump(this);");*/
     		pAddress.innerHTML = "地址:"+storeDetail.address;
     		divDetail.appendChild(p);
     		divDetail.appendChild(pAddress);
@@ -69,7 +70,8 @@ function hide(){
 $(".loading").fadeOut();
 }
   function jumpToDetail(obj){
-      var url=""
+      sessionStorage.sid=$(obj).attr("sid");
+      window.location.href = "storeDetail.html";
   }
 
 function jump(obj){
